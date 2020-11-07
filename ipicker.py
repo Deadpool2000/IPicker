@@ -63,7 +63,6 @@ try:
                 lonp=data['lon']
 
                 print(R+"\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-
                 print(Y+'\n>>>'+CY+' IP address details\n ')
                 print(G+"1) IP Address : "+Y,ip,'\n')
                 print(G+"2) Org : "+Y,org,'\n')
