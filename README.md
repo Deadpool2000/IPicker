@@ -19,9 +19,10 @@
 - Get any website's IP Address info
 - Open IP address loaction from your browser and Google Maps
 
-## Working on
+## Tested On
 
-- Any linux distro
+- Ubuntu
+- Parrot OS
 - Termux
 
 **For Termux users - You can open IP address loaction from browser or Google Maps App**
