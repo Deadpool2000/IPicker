@@ -80,7 +80,7 @@ try:
                     pr=input(R+"\n>>"+Y+" Open link in browser?"+G+" (y|n): "+W)
                     if pr=="y":
                         lnk=str(link)+" > /dev/null"
-                        os.system(str(ln))
+                        os.system(str(lnk))
                         start()
                         m3()
                     elif pr=="n":
