@@ -80,7 +80,8 @@ try:
                     link='am start -a android.intent.action.VIEW -d '+str(l)
                     pr=input(R+"\n>>"+Y+" Open link in browser?"+G+" (y|n): "+W)
                     if pr=="y":
-                        os.system(str(link))
+                        lnk=str(link)+" > /dev/null"
+                        os.system(str(ln))
                         start()
                         m3()
                     elif pr=="n":
