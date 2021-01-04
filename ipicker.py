@@ -1,3 +1,11 @@
+# IPicker
+
+# Author - D3adpool2K
+
+# github - https://github.com/Deadpool2000
+
+
+
 import json
 import urllib.request
 import webbrowser
