@@ -25,7 +25,7 @@ try:
 | |_____) )  ____| |  _ _____  ____ 
 | |  ____/ |/ ___) |_/ ) ___ |/ ___)
 | | |    | ( (___|  _ (| ____| |    
-|_|_|    |_|\____)_| \_)_____)_|   """+Y+"""v1.0"""+G+"""
+|_|_|    |_|\____)_| \_)_____)_|   """+Y+"""v1.1"""+G+"""
 
              
      Simple IP Address locator
@@ -62,25 +62,18 @@ try:
             try:
                 response = urllib.request.urlopen(u)
                 data = json.load(response)
-                ip=data['query']
-                org=data['org']
-                c=data['city']
-                cont=data['country']
-                reg=data['regionName']
-                latt=data['lat']
-                lonp=data['lon']
 
                 print(R+"\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
                 print(Y+'\n>>>'+CY+' IP address details\n ')
-                print(G+"1) IP Address : "+Y,ip,'\n')
-                print(G+"2) Org : "+Y,org,'\n')
-                print(G+"3) City : "+Y,c,'\n')
-                print(G+"4) Region : "+Y,reg,'\n')
-                print(G+"5) Country : "+Y,cont,'\n')
+                print(G+"1) IP Address : "+Y,data['query'],'\n')
+                print(G+"2) Org : "+Y,data['org'],'\n')
+                print(G+"3) City : "+Y,data['city'],'\n')
+                print(G+"4) Region : "+Y,data['regionName'],'\n')
+                print(G+"5) Country : "+Y,data['country'],'\n')
                 print(G+"6) Location\n")
-                print(G+"\tLattitude : "+Y,latt,'\n')
-                print(G+"\tLongitude : "+Y,lonp,'\n')
-                l='https://www.google.com/maps/place/'+str(latt)+'+'+str(lonp)
+                print(G+"\tLattitude : "+Y,data['lat'],'\n')
+                print(G+"\tLongitude : "+Y,data['lon'],'\n')
+                l='https://www.google.com/maps/place/'+str(data['lat'])+'+'+str(data['lon'])
                 print(R+"\n#"+Y+" Google Map link : "+CY,l)
                 path=os.path.isfile('/data/data/com.termux/files/usr/bin/bash')
                 if path:
