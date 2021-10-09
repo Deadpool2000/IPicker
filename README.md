@@ -29,16 +29,22 @@
 
 ## For more information,visit this link - [How to find IP address location using Linux & Termux](https://mrhacker7.blogspot.com/2021/09/how-to-get-ip-address-location-using.html)
 
-## Show your support
+# Donate
 
-Don't buy me a coffee.I HATE COFFEE!
 
-Just show your support here -
+### Don't buy me a coffee. I HATE COFFEE!
 
-[![Bitcoin Donate Button](https://deadpool2000.github.io/bitcoin-395-920580(1).png)](https://deadpool2000.github.io/btc.html)
 
-[![Ethereum Donate Button](https://deadpool2000.github.io/New%20Project(1).png)](https://deadpool2000.github.io/eth.html)
+### Just show your support here -
 
+
+**Bitcoin - 34TbAyKNqpEEA9123FZApkkKZ4AvWjbkom**
+
+**Ethereum - 0x8Efc824b3b3702c3b2421cAE6c47912262185042**
+
+**Litecoin -  M8FodbAuYQsWXb5VXTSx6F3VCbtcXk7skz**
+
+**Ripple(XRP) -  Address [rw2ciyaNshpHe7bCHo4bRWq6pqqynnWKQg]  / Tag [1493819154]**
 
 
 
