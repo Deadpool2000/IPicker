@@ -8,10 +8,15 @@
 
 ## Installation
 
-1) apt-get install python3
-2) git clone https://github.com/Deadpool2000/IPicker.git
-3) cd IPicker
-4) python3 ipicker.py
+```
+apt-get install python3
+
+git clone https://github.com/Deadpool2000/IPicker.git
+
+cd IPicker
+
+python3 ipicker.py
+```
 
 ## Features
 
@@ -25,7 +30,8 @@
 - Parrot OS
 - Termux
 
-## For Termux users - You can directly open IP address loaction from browser or Google Maps App
+> [!TIP]
+> For Termux users - You can directly open IP address loaction from browser or Google Maps App
 
 ## For more information,visit this link - [How to find IP address location using Linux & Termux](https://mrhacker7.blogspot.com/2021/09/how-to-get-ip-address-location-using.html)
 
