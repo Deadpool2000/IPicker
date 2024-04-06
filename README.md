@@ -11,11 +11,11 @@
 ```
 apt-get install python3
 
-git clone https://github.com/Deadpool2000/IPicker.git
+git clone https://github.com/Deadpool2000/Hamza.git
 
-cd IPicker
+cd Hamzahacker
 
-python3 ipicker.py
+python3 hamza.py
 ```
 
 ## Features
