@@ -1,0 +1,58 @@
+body.light-mode {
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+body.dark-mode {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
+.card {
+    background-color: inherit;
+    border: 1px solid;
+    border-color: rgba(0, 0, 0, 0.125);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .btn-primary {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.dark-mode .btn-secondary {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+.dark-mode .card {
+    background-color: #495057;
+    border-color: #6c757d;
+}
+
+iframe {
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    max-width: 100%; /* Ensures iframe width adapts to smaller screens */
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: inherit;
+}
+
+.theme-toggle-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: inherit;
+}
+
+.container {
+    max-width: 1200px; /* Limit the container max-width for larger screens */
+}

@@ -1,16 +1,9 @@
-# IPicker
-
-# Author - D3adpool2K
-
-# github - https://github.com/Deadpool2000
-
-
-
+from flask import Flask, render_template, request, jsonify
 import json
 import urllib.request
-import webbrowser
 import os
-import sys 
+import sys
+import argparse
 
 class IPAddressLocator:
     def __init__(self):
@@ -21,6 +14,7 @@ class IPAddressLocator:
         self.W = '\033[97m'
         self.path = os.path.isfile('/data/data/com.termux/files/usr/bin/bash')
 
+    # CLI Mode
     def start(self):
         os.system('clear')
         print(self.CY + """
@@ -29,12 +23,47 @@ class IPAddressLocator:
         | |_____) ) ____| | _ _____ ____ 
         | | ____/ |/ ___) |_/ ) ___ |/ ___)
         | | |   | ( (___| _ (| ____| |   
-        |_|_|   |_|\____)_| \_)_____)_|  """ + self.Y + """v1.2""" + self.G + """
+        |_|_|   |_|\____)_| \_)_____)_|  """ + self.Y + """v1.3""" + self.G + """
         
         
         Simple IP Address locator
         
         """ + self.R + """>>""" + self.Y + """----""" + self.CY + """ Author - Deadpool2000 """ + self.Y + """----""" + self.R + """<<""")
+
+    def finder(self, u):
+        try:
+            response = urllib.request.urlopen(u)
+            data = json.load(response)
+            print(self.R + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+            print(self.Y + '\n>>>' + self.CY + ' IP address details\n ')
+            print(self.G + "1) IP Address : " + self.Y, data['query'], '\n')
+            print(self.G + "2) Org : " + self.Y, data['org'], '\n')
+            print(self.G + "3) City : " + self.Y, data['city'], '\n')
+            print(self.G + "4) Region : " + self.Y, data['regionName'], '\n')
+            print(self.G + "5) Country : " + self.Y, data['country'], '\n')
+            print(self.G + "6) Location\n")
+            print(self.G + "\tLatitude : " + self.Y, data['lat'], '\n')
+            print(self.G + "\tLongitude : " + self.Y, data['lon'], '\n')
+            l = 'https://www.google.com/maps/place/' + str(data['lat']) + '+' + str(data['lon'])
+            print(self.R + "\n#" + self.Y + " Google Map link : " + self.CY, l)
+        except urllib.error.URLError:
+            print(self.R + "\nError!" + self.Y + " Please check your internet connection!\n" + self.W)
+            exit()
+        except KeyError:
+            print(self.R + "\nError! Invalid IP/Website Address!\n" + self.W)
+
+    def main(self):
+        u = input(self.G + "\n>>> " + self.Y + "Enter IP Address/website address:" + self.W + " ")
+        if u == "":
+            print(self.R + "\nEnter valid IP Address/website address!")
+            self.main()
+        else:
+            url = 'http://ip-api.com/json/' + u
+            self.finder(url)
+
+    def main2(self):
+        url = 'http://ip-api.com/json/'
+        self.finder(url)
 
     def m3(self):
         try:
@@ -62,83 +91,57 @@ class IPAddressLocator:
             print(self.R + "\nInvalid choice! Please try again\n")
             self.m3()
 
-    def finder(self, u):
-        try:
+
+    # GUI Mode
+    def run_gui(self):
+        app = Flask(__name__)
+
+        @app.route('/')
+        def index():
+            return render_template('index.html')
+
+        @app.route('/get_ip_details', methods=['POST'])
+        def get_ip_details():
+            ip_address = request.form.get('ip')
+            if not ip_address:
+                ip_address = ''
+            url = f'http://ip-api.com/json/{ip_address}'
             try:
-                response = urllib.request.urlopen(u)
+                response = urllib.request.urlopen(url)
                 data = json.load(response)
+                return jsonify({
+                    'success': True,
+                    'data': {
+                        'ip': data.get('query', 'N/A'),
+                        'org': data.get('org', 'N/A'),
+                        'city': data.get('city', 'N/A'),
+                        'region': data.get('regionName', 'N/A'),
+                        'country': data.get('country', 'N/A'),
+                        'lat': data.get('lat', 'N/A'),
+                        'lon': data.get('lon', 'N/A'),
+                        'map_link': f"https://www.google.com/maps/place/{data.get('lat', '')}+{data.get('lon', '')}"
+                    }
+                })
+            except Exception as e:
+                return jsonify({'success': False, 'error': str(e)})
 
-                print(self.R + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-                print(self.Y + '\n>>>' + self.CY + ' IP address details\n ')
-                print(self.G + "1) IP Address : " + self.Y, data['query'], '\n')
-                print(self.G + "2) Org : " + self.Y, data['org'], '\n')
-                print(self.G + "3) City : " + self.Y, data['city'], '\n')
-                print(self.G + "4) Region : " + self.Y, data['regionName'], '\n')
-                print(self.G + "5) Country : " + self.Y, data['country'], '\n')
-                print(self.G + "6) Location\n")
-                print(self.G + "\tLattitude : " + self.Y, data['lat'], '\n')
-                print(self.G + "\tLongitude : " + self.Y, data['lon'], '\n')
-                l = 'https://www.google.com/maps/place/' + str(data['lat']) + '+' + str(data['lon'])
-                print(self.R + "\n#" + self.Y + " Google Map link : " + self.CY, l)
-                path = os.path.isfile('/data/data/com.termux/files/usr/bin/bash')
-                if path:
-                    link = 'am start -a android.intent.action.VIEW -d ' + str(l)
-                    pr = input(self.R + "\n>>" + self.Y + " Open link in browser?" + self.G + " (y|n): " + self.W)
-                    if pr == "y":
-                        lnk = str(link) + " > /dev/null"
-                        os.system(str(lnk))
-                        self.start()
-                        self.m3()
-                    elif pr == "n":
-                        print("\nCheck another IP or exit using Ctrl + C\n\n")
-                        self.start()
-                        self.m3()
-                    else:
-                        print("\nInvalid choice! Please try again\n")
-                        self.m3()
-                else:
-                    pr = input(self.R + "\n>>" + self.Y + " Open link in browser?" + self.G + " (y|n): " + self.W)
-                    if pr == "y":
-                        webbrowser.open(l, new=0)
-                        self.start()
-                        self.m3()
-                    elif pr == "n":
-                        print(self.R + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
-                        print(self.Y + "\nCheck another IP or exit using " + self.R + "Ctrl + C\n\n")
-                        self.start()
-                        self.m3()
-                    else:
-                        print(self.R + "\nInvalid choice! Please try again\n")
-                        self.m3()
-                return
-            except KeyError:
-                print(self.R + "\nError! Invalid IP/Website Address!\n" + self.W)
-                self.m3()
-        except urllib.error.URLError:
-            print(self.R + "\nError!" + self.Y + " Please check your internet connection!\n" + self.W)
-            exit()
-
-    def main(self):
-        u = input(self.G + "\n>>> " + self.Y + "Enter IP Address/website address:" + self.W + " ")
-        if u == "":
-            print(self.R + "\nEnter valid IP Address/website address!")
-            self.main()
-        else:
-            url = 'http://ip-api.com/json/' + u
-            self.finder(url)
-
-    def main2(self):
-        url = 'http://ip-api.com/json/'
-        self.finder(url)
+        app.run(debug=True, port=5000)
 
     def run(self):
         try:
-            self.start()
-            self.m3()
+            parser = argparse.ArgumentParser(description="IPicker - A simple IP locator tool.")
+            parser.add_argument('--gui', action='store_true', help="Run in GUI mode.")
+            args = parser.parse_args()
+
+            if args.gui:
+                self.run_gui()
+            else:
+                self.start()
+                self.m3()
+
         except KeyboardInterrupt:
             print(self.Y + "\nInterrupted! Have a nice day :)" + self.W)
 
 if __name__ == "__main__":
     ip_locator = IPAddressLocator()
     ip_locator.run()
-
